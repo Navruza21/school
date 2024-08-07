@@ -9,7 +9,7 @@ import { classesData, studentsData, teachersData } from "./pages/data";
 import { DataContext } from "./pages/StudentContext";
 import Layout from "./components/layout";
 import Jurnal from "./pages/parent";
-import Parents from "./pages/Parents";
+import Parents from "./pages/parents copy";
 
 const theme = createTheme({
   palette: {
