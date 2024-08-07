@@ -1,7 +1,7 @@
 import React from "react";
 
 function YangiFayl() {
-  return <div>yangiFayllll</div>;
+  return <div>fayl</div>;
 }
 
 export default YangiFayl;
