@@ -1,7 +1,7 @@
 import React from "react";
 
 function yangi() {
-  return <div>yangi</div>;
+  return <div>yangihvgc</div>;
 }
 
 export default yangi;
