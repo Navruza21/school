@@ -8,6 +8,7 @@ import StudentsPage, { Student } from "./pages/students";
 import { classesData, studentsData, teachersData } from "./pages/data";
 import { DataContext } from "./pages/StudentContext";
 import Layout from "./components/layout";
+import Jurnal from "./pages/jurnal";
 
 const theme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ function App() {
     Classes: <Classes />,
     Teachers: <Teachers />,
     Students: <StudentsPage />,
+    Jurnal: <Jurnal />,
   };
   return (
     <ThemeProvider theme={theme}>
