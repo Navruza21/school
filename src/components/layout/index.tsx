@@ -23,8 +23,10 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { PiStudent } from "react-icons/pi";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
-import MenuIcon from "@mui/icons-material/Menu";
+// import MenuIcon from "@mui/icons-material/Menu";
+import { IoIosMenu } from "react-icons/io";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Journal from "../../pages/journal";
 
 const drawerWidth = 240;
 
@@ -126,6 +128,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       title: "Students",
       icon: <PiStudent />,
     },
+    {
+      title: "Journal",
+      icon: <PiStudent />,
+    },
   ];
 
   return (
@@ -140,7 +146,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             edge="start"
             sx={{ marginRight: 5, ...(open && { display: "none" }) }}
           >
-            <MenuIcon />
+            <IoIosMenu />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer

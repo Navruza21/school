@@ -5,11 +5,17 @@ import Dashboard from "./pages/dashboard";
 import Classes, { ClassType } from "./pages/classes";
 import Teachers, { Teacher } from "./pages/teachers";
 import StudentsPage, { Student } from "./pages/students";
-import { classesData, studentsData, teachersData } from "./pages/data";
+import {
+  classesData,
+  journalData,
+  studentsData,
+  teachersData,
+} from "./pages/data";
 import { DataContext } from "./pages/StudentContext";
 import Layout from "./components/layout";
 import Jurnal from "./pages/parent";
 import Parents from "./pages/parents copy";
+import Journal, { IJournal } from "./pages/journal";
 
 const theme = createTheme({
   palette: {
@@ -29,15 +35,17 @@ function App() {
   const [students, setStudents] = React.useState<Student[]>(studentsData);
   const [teachers, setTeachers] = React.useState<Teacher[]>(teachersData);
   const [classes, setClasses] = React.useState<ClassType[]>(classesData);
+  const [journal, setJournal] = React.useState<IJournal[]>(journalData);
 
   const pages: Record<string, React.ReactNode> = {
     Dashboard: <Dashboard />,
     Classes: <Classes />,
     Teachers: <Teachers />,
     Students: <StudentsPage />,
-    Jurnal: <Jurnal />,
+    Journal: <Journal />,
     Parents: <Parents />,
   };
+
   return (
     <ThemeProvider theme={theme}>
       <RouterContext.Provider value={{ activePage, setActivePage }}>
@@ -49,6 +57,8 @@ function App() {
             setClasses,
             teachers,
             setTeachers,
+            journal,
+            setJournal,
           }}
         >
           <CssBaseline />

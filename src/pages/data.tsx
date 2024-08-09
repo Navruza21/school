@@ -225,3 +225,35 @@ export const classesData: ClassType[] = [
     teacher: "Rustam Olimov",
   },
 ];
+export const journalData = [
+  {
+    id: 1,
+    Firstname: "name1",
+    Lastname: "name",
+    math: [5, 5, 5, 5, 4],
+  },
+  {
+    id: 2,
+    Firstname: "name2",
+    Lastname: "name",
+    math: [4, 5, 5, 5, 5],
+  },
+  {
+    id: 3,
+    Firstname: "name3",
+    Lastname: "name",
+    math: [5, 4, 5, 5, 5],
+  },
+  {
+    id: 4,
+    Firstname: "name4",
+    Lastname: "name",
+    math: [5, 5, 5, 4, 5],
+  },
+  {
+    id: 5,
+    Firstname: "name5",
+    Lastname: "name",
+    math: [5, 5, 4, 5, 5],
+  },
+];
