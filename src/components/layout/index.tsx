@@ -42,6 +42,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+
   overflowX: "hidden",
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
@@ -124,6 +125,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     },
     {
       title: "Students",
+      icon: <PiStudent />,
+    },
+    {
+      title: "Schedules",
       icon: <PiStudent />,
     },
   ];

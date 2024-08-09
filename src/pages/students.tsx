@@ -16,8 +16,6 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { classesData, studentsData } from "./data";
-import { ClassType } from "./classes";
 import { useDataContext } from "./StudentContext";
 interface ClassData {
   id?: number;

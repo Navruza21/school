@@ -1,6 +1,6 @@
-import { ClassType } from "./classes";
-import { Student } from "./students";
-import { Teacher } from "./teachers";
+import { ClassType } from "../../pages/classes";
+import { Student } from "../../pages/students";
+import { Teacher } from "../../pages/teachers";
 
 export const studentsData: Student[] = [
   {
@@ -224,4 +224,9 @@ export const classesData: ClassType[] = [
     name: "Class 11D",
     teacher: "Rustam Olimov",
   },
+];
+
+export const classScheduleData = [
+  { day: "Monday", time: "9:00 AM - 10:30 AM", subject: "Math" },
+  { day: "Tuesday", time: "11:00 AM - 12:30 PM", subject: "Science" },
 ];

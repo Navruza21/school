@@ -16,7 +16,6 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { classesData } from "./data";
 import { useDataContext } from "./StudentContext";
 
 export type ClassType = {
@@ -28,7 +27,6 @@ export type ClassType = {
 const Classes = () => {
   const { students, setStudents, teachers, setTeachers, classes, setClasses } =
     useDataContext();
-  //
 
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
   const [editIndex, setEditIndex] = React.useState<number | null>(null);
@@ -125,7 +123,7 @@ const Classes = () => {
         <TableBody>
           {classes.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">

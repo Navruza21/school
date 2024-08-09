@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ClassType } from "./classes";
 import { Teacher } from "./teachers";
 import { Student } from "./students";
+import { Schedule } from "./schedule";
 
 interface StudentContextType {
   students: Student[];
@@ -10,6 +11,8 @@ interface StudentContextType {
   setClasses: (value: ClassType[]) => void;
   teachers: Teacher[];
   setTeachers: (value: Teacher[]) => void;
+  schedules: Schedule[];
+  setSchedules: (value: Schedule[]) => void;
 }
 
 export const DataContext = React.createContext<StudentContextType>({
@@ -19,6 +22,8 @@ export const DataContext = React.createContext<StudentContextType>({
   setClasses: (value: ClassType[]) => {},
   teachers: [],
   setTeachers: (value: Teacher[]) => {},
+  schedules: [],
+  setSchedules: (value: Schedule[]) => {},
 });
 
 export const useDataContext = () => {

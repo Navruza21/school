@@ -2,13 +2,20 @@ import React, { useState } from "react";
 import "./App.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Dashboard from "./pages/dashboard";
-import Classes, { ClassType } from "./pages/classes";
-import Teachers, { Teacher } from "./pages/teachers";
-import StudentsPage, { Student } from "./pages/students";
-import { classesData, studentsData, teachersData } from "./pages/data";
+import Classes from "./pages/classes";
+import Teachers from "./pages/teachers";
+import StudentsPage from "./pages/students";
+import {
+  classesData,
+  classScheduleData,
+  studentsData,
+  teachersData,
+} from "./components/layout/data";
 import { DataContext } from "./pages/StudentContext";
 import Layout from "./components/layout";
-import Jurnal from "./pages/jurnal";
+import { FaJournalWhills } from "react-icons/fa";
+import ClassSchedule from "./pages/schedule";
+// import Schedules from "./pages/schedule";
 
 const theme = createTheme({
   palette: {
@@ -19,23 +26,26 @@ const theme = createTheme({
 });
 
 export const RouterContext = React.createContext({
-  activePage: "Dasheboard",
+  activePage: "Dashboard",
   setActivePage: (value: string) => {},
 });
 
 function App() {
   const [activePage, setActivePage] = useState("Dashboard");
-  const [students, setStudents] = React.useState<Student[]>(studentsData);
-  const [teachers, setTeachers] = React.useState<Teacher[]>(teachersData);
-  const [classes, setClasses] = React.useState<ClassType[]>(classesData);
+  const [students, setStudents] = React.useState(studentsData);
+  const [teachers, setTeachers] = React.useState(teachersData);
+  const [classes, setClasses] = React.useState(classesData);
+  const [schedules, setSchedules] = React.useState(classScheduleData);
 
   const pages: Record<string, React.ReactNode> = {
     Dashboard: <Dashboard />,
     Classes: <Classes />,
     Teachers: <Teachers />,
     Students: <StudentsPage />,
-    Jurnal: <Jurnal />,
+    Jurnal: <FaJournalWhills />,
+    Schedules: <ClassSchedule />,
   };
+
   return (
     <ThemeProvider theme={theme}>
       <RouterContext.Provider value={{ activePage, setActivePage }}>
@@ -47,6 +57,8 @@ function App() {
             setClasses,
             teachers,
             setTeachers,
+            schedules,
+            setSchedules,
           }}
         >
           <CssBaseline />
