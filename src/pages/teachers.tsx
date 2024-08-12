@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@mui/material";
-import { teachersData } from "../components/layout/data";
+import { teachersData } from "./data";
 
 export interface Teacher {
   id: number;

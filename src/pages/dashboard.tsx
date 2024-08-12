@@ -1,7 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { studentsData, teachersData } from "../components/layout/data";
+import { studentsData, teachersData } from "./data";
 import { Student } from "./students";
 
 let studentNames: string[] = [];

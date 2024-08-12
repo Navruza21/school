@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import "./App.css";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Dashboard from "./pages/dashboard";
-import Classes from "./pages/classes";
-import Teachers from "./pages/teachers";
-import StudentsPage from "./pages/students";
+import Classes, { ClassType } from "./pages/classes";
+import Teachers, { Teacher } from "./pages/teachers";
+import StudentsPage, { Student } from "./pages/students";
 import {
   classesData,
-  classScheduleData,
   studentsData,
+  journalData,
   teachersData,
-} from "./components/layout/data";
+  ScheduleData,
+} from "./pages/data";
 import { DataContext } from "./pages/StudentContext";
-import Layout from "./components/layout";
-import { FaJournalWhills } from "react-icons/fa";
-import ClassSchedule from "./pages/schedule";
-// import Schedules from "./pages/schedule";
+import Jurnal from "./pages/journal";
+import Parents from "./pages/parent";
+import ClassSchedule, { ScheduleType } from "./pages/schedule";
+import { IJournal } from "./pages/journal";
+import { Layout } from "./components/layout";
 
 const theme = createTheme({
   palette: {
@@ -32,17 +34,20 @@ export const RouterContext = React.createContext({
 
 function App() {
   const [activePage, setActivePage] = useState("Dashboard");
-  const [students, setStudents] = React.useState(studentsData);
-  const [teachers, setTeachers] = React.useState(teachersData);
-  const [classes, setClasses] = React.useState(classesData);
-  const [schedules, setSchedules] = React.useState(classScheduleData);
+  const [students, setStudents] = React.useState<Student[]>(studentsData);
+  const [teachers, setTeachers] = React.useState<Teacher[]>(teachersData);
+  const [classes, setClasses] = React.useState<ClassType[]>(classesData);
+  const [journal, setJournal] = React.useState<IJournal[]>(journalData);
+  const [schedules, setSchedules] =
+    React.useState<ScheduleType[]>(ScheduleData);
 
   const pages: Record<string, React.ReactNode> = {
     Dashboard: <Dashboard />,
     Classes: <Classes />,
     Teachers: <Teachers />,
     Students: <StudentsPage />,
-    Jurnal: <FaJournalWhills />,
+    Jurnal: <Jurnal />,
+    Parents: <Parents />,
     Schedules: <ClassSchedule />,
   };
 
@@ -57,6 +62,8 @@ function App() {
             setClasses,
             teachers,
             setTeachers,
+            journal,
+            setJournal,
             schedules,
             setSchedules,
           }}

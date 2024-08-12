@@ -1,504 +1,424 @@
+// import React, { useState } from "react";
+// import { useDataContext } from "./StudentContext";
+// import { ClassType } from "./classes";
+// import { Table, Tag } from "antd";
+// import ColumnGroup from "antd/es/table/ColumnGroup";
+// import Column from "antd/es/table/Column";
+// import { Tabs } from "antd";
+// import type { TabsProps } from "antd";
+
+// // export interface Schedule {
+// //   day: string;
+// //   time: string;
+// //   subject: string;
+// // }
+// // const columns = [
+// //   {
+// //     title: "Vaqti",
+// //     dataIndex: "time",
+// //     key: "time",
+// //   },
+// //   {
+// //     title: "Dushanba",
+// //     dataIndex: "monday",
+// //     key: "monday",
+// //   },
+// //   {
+// //     title: "Seshanba",
+// //     dataIndex: "tuesday",
+// //     key: "tuesday",
+// //   },
+// //   {
+// //     title: "Chorshanba",
+// //     dataIndex: "wednesday",
+// //     key: "wednesday",
+// //   },
+// //   {
+// //     title: "Payshanba",
+// //     dataIndex: "thursday",
+// //     key: "thursday",
+// //   },
+// //   {
+// //     title: "Juma",
+// //     dataIndex: "friday",
+// //     key: "friday",
+// //   },
+// //   {
+// //     title: "Shanba",
+// //     dataIndex: "saturday",
+// //     key: "saturday",
+// //   },
+// // ];
+
+// export interface ScheduleType {
+//   key: string;
+//   classId: 1;
+//   time: string;
+//   monday: string;
+//   tuesday: string;
+//   wednesday: string;
+//   thursday: string;
+//   friday: string;
+//   saturday: string;
+// }
+
+// // {const Schedule}
+// const onChange = (key: string) => {
+//   console.log(key);
+// };
+// export let schedulesColumns: JSX.Element;
+// const ClassSchedule = () => {
+//   const { classes, setClasses, schedules, setSchedules } = useDataContext();
+
+//   const Schedule1 = () => {
+//     return (
+//       <Table dataSource={schedules[1]}>
+//         <>
+//           <Column title="time" dataIndex="time" key="time" />
+//           <Column title="monday" dataIndex="monday" key="monday" />
+//           <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
+//           <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
+//           <Column title="thursday" dataIndex="thursday" key="thursday" />
+//           <Column title="friday" dataIndex="friday" key="friday" />
+//           <Column title="saturday" dataIndex="saturday" key="saturday" />
+//         </>
+//       </Table>
+//     );
+//   };
+//   const Schedule2 = () => {
+//     return (
+//       <Table dataSource={schedules[2]}>
+//         <>
+//           <Column title="time" dataIndex="time" key="time" />
+//           <Column title="monday" dataIndex="monday" key="monday" />
+//           <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
+//           <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
+//           <Column title="thursday" dataIndex="thursday" key="thursday" />
+//           <Column title="friday" dataIndex="friday" key="friday" />
+//           <Column title="saturday" dataIndex="saturday" key="saturday" />
+//         </>
+//       </Table>
+//     );
+//   };
+//   const Schedule3 = () => {
+//     return (
+//       <Table dataSource={schedules[3]}>
+//         <>
+//           <Column title="time" dataIndex="time" key="time" />
+//           <Column title="monday" dataIndex="monday" key="monday" />
+//           <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
+//           <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
+//           <Column title="thursday" dataIndex="thursday" key="thursday" />
+//           <Column title="friday" dataIndex="friday" key="friday" />
+//           <Column title="saturday" dataIndex="saturday" key="saturday" />
+//         </>
+//       </Table>
+//     );
+//   };
+//   const Schedule4 = () => {
+//     return (
+//       <Table dataSource={schedules[4]}>
+//         <>
+//           <Column title="time" dataIndex="time" key="time" />
+//           <Column title="monday" dataIndex="monday" key="monday" />
+//           <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
+//           <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
+//           <Column title="thursday" dataIndex="thursday" key="thursday" />
+//           <Column title="friday" dataIndex="friday" key="friday" />
+//           <Column title="saturday" dataIndex="saturday" key="saturday" />
+//         </>
+//       </Table>
+//     );
+//   };
+//   const Schedule5 = () => {
+//     return (
+//       <Table dataSource={schedules[5]}>
+//         <>
+//           <Column title="time" dataIndex="time" key="time" />
+//           <Column title="monday" dataIndex="monday" key="monday" />
+//           <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
+//           <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
+//           <Column title="thursday" dataIndex="thursday" key="thursday" />
+//           <Column title="friday" dataIndex="friday" key="friday" />
+//           <Column title="saturday" dataIndex="saturday" key="saturday" />
+//         </>
+//       </Table>
+//     );
+//   };
+//   schedulesColumns = [Schedule1, Schedule2, Schedule3, Schedule4, Schedule5];
+//   const items: TabsProps["items"] = [
+//     {
+//       key: "1",
+//       label: "Class 10A",
+//       children: <Schedule1 />,
+//     },
+//     {
+//       key: "2",
+//       label: "Class 10B",
+//       children: <Schedule2 />,
+//     },
+//     {
+//       key: "3",
+//       label: "Class 11A",
+//       children: <Schedule3 />,
+//     },
+//     {
+//       key: "4",
+//       label: "Class 11B",
+//       children: <Schedule4 />,
+//     },
+//     {
+//       key: "5",
+//       label: "Class 11D",
+//       children: <Schedule5 />,
+//     },
+//   ];
+
+//   return (
+//     <div>
+//       <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+//     </div>
+//   );
+// };
+
+// export default ClassSchedule;
+
 import React, { useState } from "react";
-import { useDataContext } from "./StudentContext";
-import { ClassType } from "./classes";
-import { Table, Tag } from "antd";
-import ColumnGroup from "antd/es/table/ColumnGroup";
-import Column from "antd/es/table/Column";
-import { Tabs } from "antd";
-import type { TabsProps } from "antd";
+import type { TableProps } from "antd";
+import { Form, Input, InputNumber, Popconfirm, Table, Typography } from "antd";
+import { ScheduleData } from "./data";
 
-export interface Schedule {
-  day: string;
+export interface ScheduleType {
+  key: string;
+  classId: number;
   time: string;
-  subject: string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
 }
-// const columns = [
-//   {
-//     title: "Vaqti",
-//     dataIndex: "time",
-//     key: "time",
-//   },
-//   {
-//     title: "Dushanba",
-//     dataIndex: "monday",
-//     key: "monday",
-//   },
-//   {
-//     title: "Seshanba",
-//     dataIndex: "tuesday",
-//     key: "tuesday",
-//   },
-//   {
-//     title: "Chorshanba",
-//     dataIndex: "wednesday",
-//     key: "wednesday",
-//   },
-//   {
-//     title: "Payshanba",
-//     dataIndex: "thursday",
-//     key: "thursday",
-//   },
-//   {
-//     title: "Juma",
-//     dataIndex: "friday",
-//     key: "friday",
-//   },
-//   {
-//     title: "Shanba",
-//     dataIndex: "saturday",
-//     key: "saturday",
-//   },
-// ];
 
-const data1 = [
-  {
-    key: "1",
-    classId: 1,
-    time: "08:00 - 08:45",
-    monday: "Mathematics",
-    tuesday: "",
-    wednesday: "Physics",
-    thursday: "Chemistry",
-    friday: "Biology",
-    saturday: "History",
-  },
-  {
-    key: "2",
-    classId: 1,
-    time: "08:50 - 09:35",
-    monday: "Physics",
-    tuesday: "Physics",
-    wednesday: "Chemistry",
-    thursday: "",
-    friday: "History",
-    saturday: "Mathematics",
-  },
-  {
-    key: "3",
-    classId: 1,
-    time: "09:40 - 10:25",
-    monday: "Chemistry",
-    tuesday: "Chemistry",
-    wednesday: "Biology",
-    thursday: "History",
-    friday: "Mathematics",
-    saturday: "Physics",
-  },
-  {
-    key: "4",
-    classId: 1,
-    time: "10:30 - 11:15",
-    monday: "Biology",
-    tuesday: "Biology",
-    wednesday: "History",
-    thursday: "Mathematics",
-    friday: "Physics",
-    saturday: "Chemistry",
-  },
-  {
-    key: "5",
-    classId: 1,
-    time: "11:20 - 12:05",
-    monday: "History",
-    tuesday: "",
-    wednesday: "Mathematics",
-    thursday: "Physics",
-    friday: "Chemistry",
-    saturday: "",
-  },
-  // Boshqa fanlar...
-];
-const data2 = [
-  {
-    key: "1",
-    classId: 2,
-    time: "08:00 - 08:45",
-    monday: "Physics",
-    tuesday: "Physics",
-    wednesday: "Chemistry",
-    thursday: "",
-    friday: "History",
-    saturday: "Mathematics",
-  },
-  {
-    key: "2",
-    classId: 2,
-    time: "08:50 - 09:35",
-    monday: "Chemistry",
-    tuesday: "",
-    wednesday: "Biology",
-    thursday: "History",
-    friday: "Mathematics",
-    saturday: "Physics",
-  },
-  {
-    key: "3",
-    classId: 2,
-    time: "09:40 - 10:25",
-    monday: "",
-    tuesday: "Mathematics",
-    wednesday: "Physics",
-    thursday: "Chemistry",
-    friday: "Biology",
-    saturday: "History",
-  },
-  {
-    key: "4",
-    classId: 2,
-    time: "10:30 - 11:15",
-    monday: "History",
-    tuesday: "History",
-    wednesday: "Mathematics",
-    thursday: "Physics",
-    friday: "Chemistry",
-    saturday: "",
-  },
-  {
-    key: "5",
-    classId: 2,
-    time: "11:20 - 12:05",
-    monday: "Biology",
-    tuesday: "Biology",
-    wednesday: "",
-    thursday: "Mathematics",
-    friday: "Physics",
-    saturday: "Chemistry",
-  },
-  // Boshqa fanlar...
-];
-const data3 = [
-  {
-    key: "1",
-    classId: 3,
-    time: "08:00 - 08:45",
-    monday: "Chemistry",
-    tuesday: "Chemistry",
-    wednesday: "Biology",
-    thursday: "History",
-    friday: "Mathematics",
-    saturday: "",
-  },
-  {
-    key: "2",
-    classId: 3,
-    time: "08:50 - 09:35",
-    monday: "",
-    tuesday: "History",
-    wednesday: "Mathematics",
-    thursday: "Physics",
-    friday: "Chemistry",
-    saturday: "Biology",
-  },
-  {
-    key: "3",
-    classId: 3,
-    time: "09:40 - 10:25",
-    monday: "",
-    tuesday: "Biology",
-    wednesday: "History",
-    thursday: "Mathematics",
-    friday: "Physics",
-    saturday: "Chemistry",
-  },
-  {
-    key: "4",
-    classId: 3,
-    time: "10:30 - 11:15",
-    monday: "Mathematics",
-    tuesday: "Mathematics",
-    wednesday: "Physics",
-    thursday: "",
-    friday: "Biology",
-    saturday: "",
-  },
-  {
-    key: "5",
-    classId: 3,
-    time: "11:20 - 12:05",
-    monday: "Physics",
-    tuesday: "",
-    wednesday: "Chemistry",
-    thursday: "Biology",
-    friday: "History",
-    saturday: "Mathematics",
-  },
-  // Boshqa fanlar...
-];
-const data4 = [
-  {
-    key: "1",
-    classId: 4,
-    time: "08:00 - 08:45",
-    monday: "Mathematics",
-    tuesday: "Mathematics",
-    wednesday: "",
-    thursday: "Chemistry",
-    friday: "Biology",
-    saturday: "History",
-  },
-  {
-    key: "2",
-    classId: 4,
-    time: "08:50 - 09:35",
-    monday: "",
-    tuesday: "Physics",
-    wednesday: "Chemistry",
-    thursday: "Biology",
-    friday: "History",
-    saturday: "Mathematics",
-  },
-  {
-    key: "3",
-    classId: 4,
-    time: "09:40 - 10:25",
-    monday: "Chemistry",
-    tuesday: "Chemistry",
-    wednesday: "Biology",
-    thursday: "",
-    friday: "Mathematics",
-    saturday: "Physics",
-  },
-  {
-    key: "4",
-    classId: 4,
-    time: "10:30 - 11:15",
-    monday: "Biology",
-    tuesday: "",
-    wednesday: "History",
-    thursday: "Mathematics",
-    friday: "Physics",
-    saturday: "Chemistry",
-  },
-  {
-    key: "5",
-    classId: 4,
-    time: "11:20 - 12:05",
-    monday: "",
-    tuesday: "History",
-    wednesday: "Mathematics",
-    thursday: "Physics",
-    friday: "Chemistry",
-    saturday: "",
-  },
-  // Boshqa fanlar...
-];
-const data5 = [
-  {
-    key: "1",
-    classId: 5,
-    time: "08:00 - 08:45",
-    monday: "Mathematics",
-    tuesday: "Mathematics",
-    wednesday: "Physics",
-    thursday: "Chemistry",
-    friday: "",
-    saturday: "History",
-  },
-  {
-    key: "2",
-    classId: 5,
-    time: "08:50 - 09:35",
-    monday: "",
-    tuesday: "Physics",
-    wednesday: "Chemistry",
-    thursday: "Biology",
-    friday: "History",
-    saturday: "Mathematics",
-  },
-  {
-    key: "3",
-    classId: 5,
-    time: "09:40 - 10:25",
-    monday: "Chemistry",
-    tuesday: "Chemistry",
-    wednesday: "Biology",
-    thursday: "",
-    friday: "Mathematics",
-    saturday: "Physics",
-  },
-  {
-    key: "4",
-    classId: 5,
-    time: "10:30 - 11:15",
-    monday: "Biology",
-    tuesday: "",
-    wednesday: "History",
-    thursday: "Mathematics",
-    friday: "Physics",
-    saturday: "Chemistry",
-  },
-  {
-    key: "5",
-    classId: 5,
-    time: "11:20 - 12:05",
-    monday: "History",
-    tuesday: "History",
-    wednesday: "Mathematics",
-    thursday: "Physics",
-    friday: "Chemistry",
-    saturday: "",
-  },
-  // Boshqa fanlar...
-];
+interface Item {
+  key: string;
+  classId: number;
+  time: string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
+}
+const originData = ScheduleData;
+// const originData: Item[] = [];
+// for (let i = 0; i < 100; i++) {
+//   originData.push({
+//     key: i.toString(),
+//     name: `Edward ${i}`,
+//     age: 32,
+//     address: `London Park no. ${i}`,
+//   });
+// }
+interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
+  editing: boolean;
+  dataIndex: string;
+  title: any;
+  inputType: "number" | "text";
+  record: Item;
+  index: number;
+}
 
-const Schedule1 = () => {
+const EditableCell: React.FC<React.PropsWithChildren<EditableCellProps>> = ({
+  editing,
+  dataIndex,
+  title,
+  inputType,
+  record,
+  index,
+  children,
+  ...restProps
+}) => {
+  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
+
   return (
-    <Table dataSource={data1}>
-      <>
-        <Column title="time" dataIndex="time" key="time" />
-        <Column title="monday" dataIndex="monday" key="monday" />
-        <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
-        <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
-        <Column title="thursday" dataIndex="thursday" key="thursday" />
-        <Column title="friday" dataIndex="friday" key="friday" />
-        <Column title="saturday" dataIndex="saturday" key="saturday" />
-      </>
-    </Table>
-  );
-};
-const Schedule2 = () => {
-  return (
-    <Table dataSource={data2}>
-      <>
-        <Column title="time" dataIndex="time" key="time" />
-        <Column title="monday" dataIndex="monday" key="monday" />
-        <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
-        <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
-        <Column title="thursday" dataIndex="thursday" key="thursday" />
-        <Column title="friday" dataIndex="friday" key="friday" />
-        <Column title="saturday" dataIndex="saturday" key="saturday" />
-      </>
-    </Table>
-  );
-};
-const Schedule3 = () => {
-  return (
-    <Table dataSource={data3}>
-      <>
-        <Column title="time" dataIndex="time" key="time" />
-        <Column title="monday" dataIndex="monday" key="monday" />
-        <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
-        <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
-        <Column title="thursday" dataIndex="thursday" key="thursday" />
-        <Column title="friday" dataIndex="friday" key="friday" />
-        <Column title="saturday" dataIndex="saturday" key="saturday" />
-      </>
-    </Table>
-  );
-};
-const Schedule4 = () => {
-  return (
-    <Table dataSource={data4}>
-      <>
-        <Column title="time" dataIndex="time" key="time" />
-        <Column title="monday" dataIndex="monday" key="monday" />
-        <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
-        <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
-        <Column title="thursday" dataIndex="thursday" key="thursday" />
-        <Column title="friday" dataIndex="friday" key="friday" />
-        <Column title="saturday" dataIndex="saturday" key="saturday" />
-      </>
-    </Table>
-  );
-};
-const Schedule5 = () => {
-  return (
-    <Table dataSource={data5}>
-      <>
-        <Column title="time" dataIndex="time" key="time" />
-        <Column title="monday" dataIndex="monday" key="monday" />
-        <Column title="tuesday" dataIndex="tuesday" key="tuesday" />
-        <Column title="wednesday" dataIndex="wednesday" key="wednesday" />
-        <Column title="thursday" dataIndex="thursday" key="thursday" />
-        <Column title="friday" dataIndex="friday" key="friday" />
-        <Column title="saturday" dataIndex="saturday" key="saturday" />
-      </>
-    </Table>
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{ margin: 0 }}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`,
+            },
+          ]}
+        >
+          {inputNode}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
   );
 };
 
-// {const Schedule}
-const onChange = (key: string) => {
-  console.log(key);
-};
+const ClassSchedule: React.FC = () => {
+  const [form] = Form.useForm();
+  const [data, setData] = useState(originData);
+  const [editingKey, setEditingKey] = useState("");
 
-const ClassSchedule = () => {
-  const { classes, setClasses } = useDataContext();
+  const isEditing = (record: Item) => record.key === editingKey;
 
-  const items: TabsProps["items"] = [
+  const edit = (record: Partial<Item> & { key: React.Key }) => {
+    form.setFieldsValue({
+      time: "",
+      monday: "",
+      tuesday: "",
+      wednesday: "",
+      thursday: "",
+      friday: "",
+      saturday: "",
+      ...record,
+    });
+    setEditingKey(record.key);
+  };
+
+  const cancel = () => {
+    setEditingKey("");
+  };
+
+  const save = async (key: React.Key) => {
+    try {
+      const row = (await form.validateFields()) as Item;
+
+      const newData = [...data];
+      const index = newData.findIndex((item) => key === item.key);
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, {
+          ...item,
+          ...row,
+        });
+        setData(newData);
+        setEditingKey("");
+      } else {
+        newData.push(row);
+        setData(newData);
+        setEditingKey("");
+      }
+    } catch (errInfo) {
+      console.log("Validate Failed:", errInfo);
+    }
+  };
+
+  const columns = [
     {
-      key: "1",
-      label: "Class 10A",
-      children: <Schedule1 />,
+      title: "time",
+      dataIndex: "time",
+      // width: "25%",
+      editable: true,
     },
     {
-      key: "2",
-      label: "Class 10B",
-      children: <Schedule2 />,
+      title: "monday",
+      dataIndex: "monday",
+      // width: "15%",
+      editable: true,
     },
     {
-      key: "3",
-      label: "Class 11A",
-      children: <Schedule3 />,
+      title: "tuesday",
+      dataIndex: "tuesday",
+      // width: "40%",
+      editable: true,
     },
     {
-      key: "4",
-      label: "Class 11B",
-      children: <Schedule4 />,
+      title: "wednesday",
+      dataIndex: "wednesday",
+      // width: "25%",
+      editable: true,
     },
     {
-      key: "5",
-      label: "Class 11D",
-      children: <Schedule5 />,
+      title: "thursday",
+      dataIndex: "thursday",
+      // width: "15%",
+      editable: true,
+    },
+    {
+      title: "friday",
+      dataIndex: "friday",
+      // width: "40%",
+      editable: true,
+    },
+    {
+      title: "saturday",
+      dataIndex: "saturday",
+      // width: "40%",
+      editable: true,
+    },
+    {
+      title: "operation",
+      dataIndex: "operation",
+      render: (_: any, record: Item) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.key)}
+              style={{ marginInlineEnd: 8 }}
+            >
+              Save
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <Typography.Link
+            disabled={editingKey !== ""}
+            onClick={() => edit(record)}
+          >
+            Edit
+          </Typography.Link>
+        );
+      },
     },
   ];
 
+  const mergedColumns: TableProps["columns"] = columns.map((col) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record: Item) => ({
+        record,
+        inputType: col.dataIndex === "age" ? "number" : "text",
+        dataIndex: col.dataIndex,
+        title: col.title,
+        editing: isEditing(record),
+      }),
+    };
+  });
+
   return (
-    <div>
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-    </div>
+    <Form form={form} component={false}>
+      <Table
+        components={{
+          body: {
+            cell: EditableCell,
+          },
+        }}
+        bordered
+        dataSource={data}
+        columns={mergedColumns}
+        rowClassName="editable-row"
+        pagination={{
+          onChange: cancel,
+        }}
+      />
+    </Form>
   );
 };
 
 export default ClassSchedule;
-
-// salom
-
-// // import React from "react";
-// // import { Table } from "antd";
-
-// // interface MyRecord {
-// //   name: string;
-// //   // Другие поля записи...
-// // }
-
-// // const table_columns = [
-// //   {
-// //     title: "Name",
-// //     dataIndex: "name",
-// //     key: "name",
-// //     onCell: (record: MyRecord, rowIndex: number) => {
-// //       return {
-// //         onClick: (ev: React.MouseEvent<HTMLElement>) => {
-// //           console.log(record, rowIndex);
-// //           // Здесь вы можете обработать нажатие на ячейку
-// //         },
-// //       };
-// //     },
-// //   },
-// //   // Другие колонки таблицы...
-// // ];
-
-// // // Ваш источник данных для таблицы
-// // const dataSource = [
-// //   {
-// //     key: "1",
-// //     name: "salom",
-// //   },
-// // ];
-
-// // const MyTable: React.FC = () => {
-// //   return <Table columns={table_columns} dataSource={dataSource} />;
-// // };
-
-// // export default MyTable;
