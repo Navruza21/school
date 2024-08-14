@@ -26,7 +26,7 @@ import { MdGroups } from "react-icons/md";
 // import MenuIcon from "@mui/icons-material/Menu";
 import { IoIosMenu } from "react-icons/io";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import Journal from "../../pages/journal";
+// import Journal from "../../pages/journal";
 
 const drawerWidth = 240;
 
