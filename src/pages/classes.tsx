@@ -16,29 +16,30 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { classesData } from "./data";
 import { useDataContext } from "./StudentContext";
 
 export type ClassType = {
   id: number;
   name: string;
   teacher: string;
+  schedule: string;
 };
 
 const Classes = () => {
   const { students, setStudents, teachers, setTeachers, classes, setClasses } =
     useDataContext();
-  //
 
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
   const [editIndex, setEditIndex] = React.useState<number | null>(null);
   const [editName, setEditName] = React.useState("");
   const [editTeacher, setEditTeacher] = React.useState("");
+  const [editSchedule, setEditSchedule] = React.useState("");
 
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
   const [addIndex, setAddIndex] = React.useState<number | null>(null);
   const [addName, setAddName] = React.useState("");
   const [addTeacher, setAddTeacher] = React.useState("");
+  const [addSchedule, setAddSchedule] = React.useState("");
 
   // edit dialog(modal)
   const handleOpenEditModal = (index: number) => {
@@ -46,6 +47,7 @@ const Classes = () => {
     setEditIndex(index);
     setEditName(classToEdit.name);
     setEditTeacher(classToEdit.teacher);
+    setEditSchedule(classToEdit.schedule);
     setIsEditModalOpen(true);
   };
 
@@ -54,6 +56,7 @@ const Classes = () => {
     setEditIndex(null);
     setEditName("");
     setEditTeacher("");
+    setEditSchedule("");
   };
 
   const handleSaveEdit = () => {
@@ -63,6 +66,7 @@ const Classes = () => {
         ...updatedClasses[editIndex],
         name: editName,
         teacher: editTeacher,
+        schedule: editSchedule,
       };
       setClasses(updatedClasses);
       handleCloseEditModal();
@@ -75,10 +79,12 @@ const Classes = () => {
       id: students.length + 1,
       name: addName,
       teacher: addTeacher,
+      schedule: addSchedule,
     };
     setAddIndex(students.length);
     setAddName(classToAdd.name);
     setAddTeacher(classToAdd.teacher);
+    setAddSchedule(classToAdd.schedule);
   };
 
   const handleCloseAddModal = () => {
@@ -86,6 +92,7 @@ const Classes = () => {
     setAddIndex(null);
     setAddName("");
     setAddTeacher("");
+    setAddSchedule("");
   };
 
   const handleSaveAdd = () => {
@@ -96,6 +103,7 @@ const Classes = () => {
         id: classes.length,
         name: addName,
         teacher: addTeacher,
+        schedule: addSchedule,
       };
       setClasses(updatedClasses);
       setIsAddModalOpen(false);
@@ -125,7 +133,7 @@ const Classes = () => {
         <TableBody>
           {classes.map((row, index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">

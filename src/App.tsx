@@ -5,12 +5,18 @@ import Dashboard from "./pages/dashboard";
 import Classes, { ClassType } from "./pages/classes";
 import Teachers, { Teacher } from "./pages/teachers";
 import StudentsPage, { Student } from "./pages/students";
-import { classesData, studentsData, teachersData } from "./pages/data";
-import { DataContext } from "./pages/StudentContext";
-import Layout from "./components/layout";
 import Jurnal from "./pages/parent";
 import Parents from "./pages/parents copy";
 import Journal from "./pages/journal";
+import {
+  classesData,
+  studentsData,
+  teachersData,
+  ScheduleData,
+} from "./pages/data";
+import { DataContext } from "./pages/StudentContext";
+import ClassSchedule, { ScheduleType } from "./pages/schedule";
+import { Layout } from "./components/layout";
 
 const theme = createTheme({
   palette: {
@@ -21,7 +27,7 @@ const theme = createTheme({
 });
 
 export const RouterContext = React.createContext({
-  activePage: "Dasheboard",
+  activePage: "Dashboard",
   setActivePage: (value: string) => {},
 });
 
@@ -31,14 +37,17 @@ function App() {
   const [teachers, setTeachers] = React.useState<Teacher[]>(teachersData);
   const [classes, setClasses] = React.useState<ClassType[]>(classesData);
   const [journal, setJournal] = React.useState<Student[]>(studentsData);
+  const [schedules, setSchedules] =
+    React.useState<ScheduleType[]>(ScheduleData);
 
   const pages: Record<string, React.ReactNode> = {
     Dashboard: <Dashboard />,
     Classes: <Classes />,
     Teachers: <Teachers />,
     Students: <StudentsPage />,
-    Journal: <Journal />,
+    Jurnal: <Jurnal />,
     Parents: <Parents />,
+    Schedules: <ClassSchedule />,
   };
 
   return (
@@ -54,6 +63,8 @@ function App() {
             setTeachers,
             journal,
             setJournal,
+            schedules,
+            setSchedules,
           }}
         >
           <CssBaseline />
