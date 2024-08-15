@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Table,
@@ -16,6 +16,10 @@ import {
   addMonths,
   isSameDay,
   getDay,
+  startOfYear,
+  endOfYear,
+  eachMonthOfInterval,
+  isSameMonth,
 } from "date-fns";
 import {
   FaRegArrowAltCircleLeft,
@@ -24,13 +28,29 @@ import {
 import "./assesment.css";
 import { useDataContext } from "../StudentContext";
 
+// Utility functions for local storage
+const saveScoresToLocalStorage = (
+  subject: string,
+  date: string,
+  scores: any
+) => {
+  const key = `scores_${subject}_${date}`;
+  localStorage.setItem(key, JSON.stringify(scores));
+};
+
+const loadScoresFromLocalStorage = (subject: string, date: string) => {
+  const key = `scores_${subject}_${date}`;
+  const scores = localStorage.getItem(key);
+  return scores ? JSON.parse(scores) : {};
+};
+
 const holidays = [new Date(2024, 0, 1), new Date(2024, 6, 4)];
 
 const isHoliday = (date: Date): boolean => {
   return holidays.some((holiday) => isSameDay(date, holiday));
 };
 
-const Assessment: React.FC = () => {
+const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [editingCell, setEditingCell] = useState<{
@@ -42,6 +62,12 @@ const Assessment: React.FC = () => {
   }>({});
 
   const { students } = useDataContext();
+
+  useEffect(() => {
+    const date = format(currentMonth, "yyyy-MM");
+    const scores = loadScoresFromLocalStorage(subject, date);
+    setStudentScores(scores);
+  }, [subject, currentMonth]);
 
   const handlePreviousMonth = (): void => {
     setCurrentMonth(addMonths(currentMonth, -1));
@@ -55,8 +81,22 @@ const Assessment: React.FC = () => {
     setSelectedDate(date);
   };
 
+  const handleMonthClick = (month: Date): void => {
+    setCurrentMonth(month);
+  };
+
   const handleDoubleClick = (studentIndex: number, date: Date): void => {
     setEditingCell({ studentIndex, date });
+  };
+
+  const handleEnterDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    studentIndex: number,
+    date: Date
+  ) => {
+    if (e.key === "Enter") {
+      handleBlur(studentIndex, date, (e.target as HTMLInputElement).value);
+    }
   };
 
   const handleBlur = (
@@ -64,14 +104,40 @@ const Assessment: React.FC = () => {
     date: Date,
     value: string
   ): void => {
-    setStudentScores((prevScores) => ({
-      ...prevScores,
-      [studentIndex]: {
-        ...prevScores[studentIndex],
-        [date.toISOString()]: value,
-      },
-    }));
+    const score = Number(value);
+    if (score >= 1 && score <= 5) {
+      const formattedDate = format(date, "yyyy-MM-dd"); // Format date correctly
+      setStudentScores((prevScores) => {
+        const newScores = {
+          ...prevScores,
+          [studentIndex]: {
+            ...prevScores[studentIndex],
+            [formattedDate]: value, // Save score using formatted date
+          },
+        };
+        const dateKey = format(currentMonth, "yyyy-MM");
+        saveScoresToLocalStorage(subject, dateKey, newScores);
+        return newScores;
+      });
+    }
     setEditingCell(null);
+  };
+
+  const getColorForScore = (score: string) => {
+    switch (score) {
+      case "5":
+        return "green";
+      case "4":
+        return "yellow";
+      case "3":
+        return "orange";
+      case "2":
+        return "red";
+      case "1":
+        return "red";
+      default:
+        return "";
+    }
   };
 
   const datesInMonth = eachDayOfInterval({
@@ -79,18 +145,25 @@ const Assessment: React.FC = () => {
     end: endOfMonth(currentMonth),
   }).filter((date) => getDay(date) !== 0 && !isHoliday(date));
 
+  const monthsInYear = eachMonthOfInterval({
+    start: startOfYear(new Date()),
+    end: endOfYear(new Date()),
+  });
+
   return (
-    <Box sx={{ padding: 0 }}>
-      <TableContainer
+    <Box sx={{ padding: 0, paddingX: "0px" }}>
+      <Box
         sx={{
           maxHeight: 500,
           overflowY: "scroll",
+          padding: "0px",
+          paddingX: "0px",
         }}
         className="scrollbar-hidden"
       >
         <div className="date-picker">
           <div className="flex justify-center align-middle content-center">
-            <div className="header w-[140px]">
+            {/* <div className="header w-[140px]">
               <button onClick={handlePreviousMonth}>
                 <FaRegArrowAltCircleLeft />
               </button>
@@ -100,7 +173,20 @@ const Assessment: React.FC = () => {
               <button onClick={handleNextMonth}>
                 <FaRegArrowAltCircleRight />
               </button>
-            </div>
+            </div> */}
+          </div>
+          <div className="month-picker flex justify-between mx-2 my-3">
+            {monthsInYear.map((month) => (
+              <button
+                key={month.toISOString()}
+                className={`month-button ${
+                  isSameMonth(currentMonth, month) ? "selected-month" : "unsele"
+                }`}
+                onClick={() => handleMonthClick(month)}
+              >
+                {format(month, "MMMM")}
+              </button>
+            ))}
           </div>
         </div>
         <Table>
@@ -135,7 +221,7 @@ const Assessment: React.FC = () => {
                           : ""
                       } `}
                     >
-                      tematematema thfghfkyfjfyrfema
+                      tematematema tema
                     </p>
                   </div>
                 </TableCell>
@@ -156,6 +242,13 @@ const Assessment: React.FC = () => {
                   <TableCell
                     key={date.toISOString()}
                     onDoubleClick={() => handleDoubleClick(studentIndex, date)}
+                    style={{
+                      backgroundColor: getColorForScore(
+                        studentScores[studentIndex]?.[
+                          format(date, "yyyy-MM-dd")
+                        ] || ""
+                      ),
+                    }}
                   >
                     {editingCell &&
                     editingCell.studentIndex === studentIndex &&
@@ -166,9 +259,14 @@ const Assessment: React.FC = () => {
                         onBlur={(e) =>
                           handleBlur(studentIndex, date, e.target.value)
                         }
+                        onKeyDown={(e) =>
+                          handleEnterDown(e, studentIndex, date)
+                        }
                       />
                     ) : (
-                      studentScores[studentIndex]?.[date.toISOString()] || ""
+                      studentScores[studentIndex]?.[
+                        format(date, "yyyy-MM-dd")
+                      ] || ""
                     )}
                   </TableCell>
                 ))}
@@ -176,7 +274,7 @@ const Assessment: React.FC = () => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </Box>
     </Box>
   );
 };

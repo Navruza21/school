@@ -1,11 +1,7 @@
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
-import { studentsData, teachersData } from "./data";
-import { Student } from "./students";
-
-let studentNames: string[] = [];
-let teacherNames: string[] = [];
+import { studentsData } from "./data";
 
 const options: ApexOptions = {
   colors: ["#3C50E0", "#80CAEE"],
@@ -21,7 +17,6 @@ const options: ApexOptions = {
       enabled: true,
     },
   },
-
   responsive: [
     {
       breakpoint: 1536,
@@ -56,10 +51,6 @@ const options: ApexOptions = {
     fontFamily: "Satoshi",
     fontWeight: 800,
     fontSize: "20px",
-
-    // markers: {
-    //   radius: 99,
-    // },
   },
   fill: {
     opacity: 1,
@@ -74,37 +65,22 @@ interface ChartTwoState {
 }
 
 const Dashboard: React.FC = () => {
-  const [studentData, setStudentData] = useState<Student[]>(studentsData);
-  const [teacherData, setTeacherData] = useState<Student[]>(teachersData);
-
-  studentNames = studentData.map((item) => item.lastName);
-  teacherNames = teacherData.map((item) => item.lastName);
-
   const [state, setState] = useState<ChartTwoState>({
     series: [
       {
         name: "Reyting",
-        data: studentData.map((item) => item.reyting),
+        data: studentsData.map((item) => item.reyting),
       },
     ],
   });
 
-  // const handleReset = () => {
-  //   setState((prevState) => ({
-  //     ...prevState,
-  //   }));
-  // };
-  // handleReset;
-
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
-      <h1>test </h1>
-      <div className="mb-4 justify-between gap-4 sm:flex">
-        <h4 className="text-xl font-semibold text-black dark:text-white">
-          Students Reyting chart
+    <div className="col-span-12 rounded-sm border border-stroke mt-3 bg-white p-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-4">
+      <div className="mb-4 justify-between gap-4 sm:flex ">
+        <h4 className="text-xl font-semibold text-black dark:text-white p-4">
+          Students Reyting Chart
         </h4>
       </div>
-
       <div>
         <div id="chartTwo" className="ml-5 mb-9">
           <ReactApexChart

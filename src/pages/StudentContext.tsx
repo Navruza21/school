@@ -15,6 +15,8 @@ interface StudentContextType {
   setJournal: (value: Student[]) => void;
   schedules: ScheduleType[];
   setSchedules: (value: ScheduleType[]) => void;
+  parents: Student[];
+  setParents: (value: Student[]) => void;
 }
 
 export const DataContext = React.createContext<StudentContextType>({
@@ -28,6 +30,8 @@ export const DataContext = React.createContext<StudentContextType>({
   setSchedules: (value: ScheduleType[]) => {},
   journal: [],
   setJournal: (value: Student[]) => {},
+  parents: [],
+  setParents: (value: Student[]) => {},
 });
 
 export const useDataContext = () => {

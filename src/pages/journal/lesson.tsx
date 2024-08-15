@@ -7,7 +7,7 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import Assessment from "./assessment";
 import "./lesson.css";
-import Calendar from "./data";
+import Calendar from "./calendar";
 
 const subjects = [
   { subject: "Math" },
@@ -35,9 +35,6 @@ export const Lesson = () => {
 
   return (
     <Box sx={{ boxShadow: 3, bgcolor: "white", height: "auto" }}>
-      {/* <Box>
-        <Typography>Subjects</Typography>
-      </Box> */}
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box
@@ -64,9 +61,9 @@ export const Lesson = () => {
             </TabList>
           </Box>
           {subjects.map((subj, index) => (
-            <TabPanel key={index} value={`${index + 1}`}>
+            <TabPanel key={index} value={`${index + 1}`} sx={{ padding: 0 }}>
               <Box sx={{ padding: 0 }}>
-                <Assessment />
+                <Assessment subject={subj.subject.trim()} />
               </Box>
             </TabPanel>
           ))}

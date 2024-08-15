@@ -65,7 +65,13 @@
   margin: auto;
 }
 .css-1ygcj2i-MuiTableCell-root {
-  padding: 0 !important;
+  padding-top: 0 !important;
+}
+.css-1ygcj2i-MuiTableCell-root {
+  padding: 0;
+}
+.css-13xfq8m-MuiTabPanel-root {
+  padding: 20px;
 }
 button {
   background: none;
@@ -87,4 +93,10 @@ button {
 }
 .selectedDateTopic {
   border-bottom: 2px solid #6200ea;
+}
+.selected-month {
+  color: #6200ea;
+}
+.unsele {
+  color: #727272;
 }

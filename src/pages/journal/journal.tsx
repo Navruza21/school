@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Lesson } from "./lesson";
-import Calendar from "./data";
+import Calendar from "./calendar";
 
 export const Journal = () => {
   return (
@@ -9,10 +9,7 @@ export const Journal = () => {
         sx={{ display: "flex", gap: 4, flexDirection: "column", marginTop: 5 }}
       >
         <Lesson />
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box>{/* <Assessment /> */}</Box>
-          <Box>{/* <Calendar /> */}</Box>
-        </Box>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
       </Box>
     </Box>
   );

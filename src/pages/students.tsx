@@ -15,54 +15,55 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useDataContext } from "./StudentContext";
+
 interface ClassData {
-  id?: number;
-  name?: string;
-  teacher?: string;
-  subject?: string;
-}
-export interface Student {
   id: number;
+  name: string;
+  teacher: string;
+  subject: string;
+}
+
+export interface Student {
+  id: string;
   firstName: string;
   lastName: string;
-  classId: number;
+  classId: string;
   address: string;
   phone: string;
   reyting: number;
+  parent: string;
+  relation: string;
 }
 
 const StudentsPage = () => {
-  const { students, setStudents, teachers, setTeachers, classes, setClasses } =
-    useDataContext();
-  // const [students, setStudents] = React.useState<Student[]>(studentsData);
-  // const [clasData, setClaseData] = React.useState<
-  //   {
-  //     id: number;
-  //     name: string;
-  //     teacher: string;
-  //     subject: string;
-  //   }[]
-  // >(classesData);
+  const { students, setStudents, classes } = useDataContext();
 
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
   const [editIndex, setEditIndex] = React.useState<number | null>(null);
   const [editFirstName, setEditFirstName] = React.useState("");
   const [editLastName, setEditLastName] = React.useState("");
   const [editAddress, setEditAddress] = React.useState("");
-  const [editClassId, setEditClassId] = React.useState<number>(0);
+  const [editClassId, setEditClassId] = React.useState<string>("");
   const [editPhone, setEditPhone] = React.useState("");
   const [editReyting, setEditReyting] = React.useState<number>(0);
+  const [editParent, setEditParent] = React.useState("");
+  const [editRelation, setEditRelation] = React.useState("");
 
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
-  const [addIndex, setAddIndex] = React.useState<number | null>(null);
   const [addFirstName, setAddFirstName] = React.useState("");
   const [addLastName, setAddLastName] = React.useState("");
   const [addAddress, setAddAddress] = React.useState("");
-  const [addClassId, setAddClassId] = React.useState<number>(0);
+  const [addClassId, setAddClassId] = React.useState<string>("");
   const [addPhone, setAddPhone] = React.useState("");
   const [addReyting, setAddReyting] = React.useState<number>(0);
+  const [addParent, setAddParent] = React.useState("");
+  const [addRelation, setAddRelation] = React.useState("");
+
+  const parentRelations = ["Mother", "Father", "Guardian", "Other"];
 
   const handleOpenEditModal = (index: number) => {
     const studentToEdit = students[index];
@@ -73,6 +74,8 @@ const StudentsPage = () => {
     setEditClassId(studentToEdit.classId);
     setEditPhone(studentToEdit.phone);
     setEditReyting(studentToEdit.reyting);
+    setEditParent(studentToEdit.parent);
+    setEditRelation(studentToEdit.relation);
     setIsEditModalOpen(true);
   };
 
@@ -82,9 +85,11 @@ const StudentsPage = () => {
     setEditFirstName("");
     setEditLastName("");
     setEditAddress("");
-    setEditClassId(0);
+    setEditClassId("");
     setEditPhone("");
     setEditReyting(0);
+    setEditParent("");
+    setEditRelation("");
   };
 
   const handleSaveEdit = () => {
@@ -98,144 +103,106 @@ const StudentsPage = () => {
         classId: editClassId,
         phone: editPhone,
         reyting: editReyting,
+        parent: editParent,
+        relation: editRelation,
       };
       setStudents(updatedStudents);
       handleCloseEditModal();
     }
   };
 
-  // add dialog(modal)
   const handleOpenAddModal = () => {
-    const studentToAdd: Student = {
-      id: students.length + 1,
-      firstName: addFirstName,
-      lastName: addLastName,
-      address: addAddress,
-      classId: addClassId,
-      phone: editPhone,
-      reyting: addReyting,
-    };
-    setAddIndex(students.length);
-    setAddFirstName(studentToAdd.firstName);
-    setAddLastName(studentToAdd.lastName);
-    setAddAddress(studentToAdd.address);
-    setAddClassId(studentToAdd.classId);
-    setAddPhone(studentToAdd.phone);
-    setAddReyting(studentToAdd.reyting);
     setIsAddModalOpen(true);
   };
 
   const handleCloseAddModal = () => {
     setIsAddModalOpen(false);
-    setAddIndex(null);
     setAddFirstName("");
     setAddLastName("");
     setAddAddress("");
-    setAddClassId(0);
+    setAddClassId("");
     setAddPhone("");
     setAddReyting(0);
+    setAddParent("");
+    setAddRelation("");
   };
 
   const handleSaveAdd = () => {
-    if (addIndex !== null) {
-      const updatedStudents = [...students];
-      updatedStudents[students.length] = {
-        ...updatedStudents[students.length],
-        id: students.length,
-        firstName: addFirstName,
-        lastName: addLastName,
-        address: addAddress,
-        classId: addClassId,
-        phone: addPhone,
-        reyting: addReyting,
-      };
-      setStudents(updatedStudents);
-      setIsAddModalOpen(false);
-    }
+    const newStudent: Student = {
+      id: String(students.length + 1),
+      firstName: addFirstName,
+      lastName: addLastName,
+      address: addAddress,
+      classId: addClassId,
+      phone: addPhone,
+      reyting: addReyting,
+      parent: addParent,
+      relation: addRelation,
+    };
+
+    setStudents([...students, newStudent]);
+    handleCloseAddModal();
   };
 
-  // delete
-  const deleteStudent = (id: number): Student[] => {
-    console.log("test delete1");
-
+  const deleteStudent = (id: string) => {
     const updatedStudents = students.filter((student) => student.id !== id);
-    console.log("test delete2", updatedStudents);
     setStudents(updatedStudents);
-    return updatedStudents;
   };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>#</TableCell>
-            <TableCell align="right">First name</TableCell>
-            <TableCell align="right">Lastname</TableCell>
-            <TableCell align="right">classId</TableCell>
+            <TableCell align="right">First Name</TableCell>
+            <TableCell align="right">Last Name</TableCell>
+            <TableCell align="right">Class</TableCell>
             <TableCell align="right">Address</TableCell>
             <TableCell align="right">Phone</TableCell>
             <TableCell align="right">Reyting</TableCell>
-
             <TableCell align="right">
-              <Button
-                onClick={() => {
-                  handleOpenAddModal();
-                }}
-              >
-                +
-              </Button>
+              <Button onClick={handleOpenAddModal}>+</Button>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {students.map((row, index) => (
             <TableRow
-              key={row.firstName}
+              key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
-                {index + 1}
-              </TableCell>{" "}
+              <TableCell>{index + 1}</TableCell>
               <TableCell align="right">{row.firstName}</TableCell>
               <TableCell align="right">{row.lastName}</TableCell>
               <TableCell align="right">
-                {" "}
-                {classes.find((item: ClassData) => item.id == row.id)?.name}
-                {/* /{clasData.find((item) => item.id === row.id)} */}
+                {classes.find((cls) => cls.id === row.classId)?.name}
               </TableCell>
               <TableCell align="right">{row.address}</TableCell>
               <TableCell align="right">{row.phone}</TableCell>
               <TableCell align="right">{row.reyting}</TableCell>
               <TableCell align="right">
-                <Button
-                  onClick={() => {
-                    handleOpenEditModal(index);
-                  }}
-                >
+                <Button onClick={() => handleOpenEditModal(index)}>
                   <EditIcon />
                 </Button>
-                <Button>
-                  <DeleteIcon
-                    onClick={() => {
-                      deleteStudent(row.id);
-                      console.log("delete");
-                    }}
-                    className="text-red-600"
-                  />
+                <Button onClick={() => deleteStudent(row.id)}>
+                  <DeleteIcon className="text-red-600" />
                 </Button>
-              </TableCell>{" "}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      {/* Edit Student */}
       <Dialog open={isEditModalOpen} onClose={handleCloseEditModal}>
         <DialogTitle>Edit Student</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            id="fisrtName"
-            label="Fisrt Name"
+            id="firstName"
+            label="First Name"
             type="text"
             fullWidth
             value={editFirstName}
@@ -249,29 +216,34 @@ const StudentsPage = () => {
             fullWidth
             value={editLastName}
             onChange={(e) => setEditLastName(e.target.value)}
-          />{" "}
+          />
           <TextField
             margin="dense"
             id="address"
-            label="Addres"
+            label="Address"
             type="text"
             fullWidth
             value={editAddress}
             onChange={(e) => setEditAddress(e.target.value)}
           />
-          <TextField
+          <Select
             margin="dense"
             id="classId"
-            label="classId"
-            type="number"
+            label="Class"
             fullWidth
             value={editClassId}
-            onChange={(e) => setEditClassId(Number(e.target.value))}
-          />
+            onChange={(e) => setEditClassId(e.target.value as string)}
+          >
+            {classes.map((cls) => (
+              <MenuItem key={cls.id} value={cls.id}>
+                {cls.name}
+              </MenuItem>
+            ))}
+          </Select>
           <TextField
             margin="dense"
             id="phone"
-            label="phone"
+            label="Phone"
             type="text"
             fullWidth
             value={editPhone}
@@ -280,11 +252,34 @@ const StudentsPage = () => {
           <TextField
             margin="dense"
             id="reyting"
-            label="reyting"
-            type="text"
+            label="Reyting"
+            type="number"
             fullWidth
             value={editReyting}
             onChange={(e) => setEditReyting(Number(e.target.value))}
+          />
+          <Select
+            margin="dense"
+            id="parent"
+            label="Parent"
+            fullWidth
+            value={editParent}
+            onChange={(e) => setEditParent(e.target.value as string)}
+          >
+            {parentRelations.map((relation) => (
+              <MenuItem key={relation} value={relation}>
+                {relation}
+              </MenuItem>
+            ))}
+          </Select>
+          <TextField
+            margin="dense"
+            id="relation"
+            label="Relation"
+            type="text"
+            fullWidth
+            value={editRelation}
+            onChange={(e) => setEditRelation(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -295,16 +290,18 @@ const StudentsPage = () => {
         </DialogActions>
       </Dialog>
 
+      {/* Add Student Dialog */}
       <Dialog open={isAddModalOpen} onClose={handleCloseAddModal}>
         <DialogTitle>Add Student</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            id="fisrtName"
-            label="Fisrt Name"
+            id="firstName"
+            label="First Name"
             type="text"
             fullWidth
+            value={addFirstName}
             onChange={(e) => setAddFirstName(e.target.value)}
           />
           <TextField
@@ -313,28 +310,36 @@ const StudentsPage = () => {
             label="Last Name"
             type="text"
             fullWidth
+            value={addLastName}
             onChange={(e) => setAddLastName(e.target.value)}
-          />{" "}
+          />
           <TextField
             margin="dense"
             id="address"
-            label="Addres"
+            label="Address"
             type="text"
             fullWidth
+            value={addAddress}
             onChange={(e) => setAddAddress(e.target.value)}
-          />{" "}
-          <TextField
+          />
+          <Select
             margin="dense"
-            id="class"
-            label="Class id"
-            type="number"
+            id="classId"
+            label="Class"
             fullWidth
-            onChange={(e) => setAddClassId(Number(e.target.value))}
-          />{" "}
+            value={addClassId}
+            onChange={(e) => setAddClassId(e.target.value as string)}
+          >
+            {classes.map((cls) => (
+              <MenuItem key={cls.id} value={cls.id}>
+                {cls.name}
+              </MenuItem>
+            ))}
+          </Select>
           <TextField
             margin="dense"
             id="phone"
-            label="phone"
+            label="Phone"
             type="text"
             fullWidth
             value={addPhone}
@@ -343,10 +348,29 @@ const StudentsPage = () => {
           <TextField
             margin="dense"
             id="reyting"
-            label="reyting"
+            label="Reyting"
             type="number"
             fullWidth
+            value={addReyting}
             onChange={(e) => setAddReyting(Number(e.target.value))}
+          />
+          <TextField
+            margin="dense"
+            id="parent"
+            label="Parents Full Name"
+            type="text"
+            fullWidth
+            value={addParent}
+            onChange={(e) => setAddParent(e.target.value)}
+          />
+          <TextField
+            margin="dense"
+            id="relation"
+            label="Father or mother"
+            type="text"
+            fullWidth
+            value={addRelation}
+            onChange={(e) => setAddRelation(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -359,4 +383,5 @@ const StudentsPage = () => {
     </TableContainer>
   );
 };
+
 export default StudentsPage;

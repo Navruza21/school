@@ -5,7 +5,7 @@ import Dashboard from "./pages/dashboard";
 import Classes, { ClassType } from "./pages/classes";
 import Teachers, { Teacher } from "./pages/teachers";
 import StudentsPage, { Student } from "./pages/students";
-import Parents from "./pages/parents copy";
+import Parents from "./pages/parent";
 import { Journal } from "./pages/journal/journal";
 import {
   classesData,
@@ -36,6 +36,7 @@ function App() {
   const [teachers, setTeachers] = React.useState<Teacher[]>(teachersData);
   const [classes, setClasses] = React.useState<ClassType[]>(classesData);
   const [journal, setJournal] = React.useState<Student[]>(studentsData);
+  const [parents, setParents] = React.useState<Student[]>(studentsData);
   const [schedules, setSchedules] =
     React.useState<ScheduleType[]>(ScheduleData);
 
@@ -62,8 +63,11 @@ function App() {
             setTeachers,
             journal,
             setJournal,
+            parents,
+            setParents,
             schedules,
             setSchedules,
+
           }}
         >
           <CssBaseline />
