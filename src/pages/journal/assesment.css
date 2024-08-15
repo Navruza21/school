@@ -1,0 +1,90 @@
+.tbodyAsses {
+  max-height: 600px !important;
+}
+.inputList {
+  height: 40px !important;
+  border: 1px solid #aab0ba !important;
+  border-radius: 10px;
+}
+.scrollbar-hidden {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  /* For Chrome, Safari, and Opera */
+  display: none;
+}
+/* src/DatePicker.css */
+.date-picker {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dates {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  /* padding: 10px 0; */
+}
+
+.date {
+  /* width: 30px;
+  height: 30px; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* margin: 0 2px; */
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 0px !important;
+  /* min-width: 90px; */
+}
+
+.date.selected {
+  background-color: #6200ea;
+  color: white;
+  border-radius: 50%;
+}
+.selected {
+  background-color: #6200ea;
+  color: white;
+  border-radius: 50%;
+  width: 30px !important;
+  height: 30px !important;
+  margin: auto;
+}
+.css-1ygcj2i-MuiTableCell-root {
+  padding: 0 !important;
+}
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+/* src/data.css */
+.date {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.word {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+}
+.selectedDateTopic {
+  border-bottom: 2px solid #6200ea;
+}

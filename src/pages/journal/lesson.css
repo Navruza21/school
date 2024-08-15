@@ -1,0 +1,14 @@
+.inputList {
+  height: 40px !important;
+  border: 1px solid #aab0ba !important;
+  border-radius: 10px;
+}
+.scrollbar-hidden {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  /* For Chrome, Safari, and Opera */
+  display: none;
+}

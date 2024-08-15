@@ -5,9 +5,8 @@ import Dashboard from "./pages/dashboard";
 import Classes, { ClassType } from "./pages/classes";
 import Teachers, { Teacher } from "./pages/teachers";
 import StudentsPage, { Student } from "./pages/students";
-import Jurnal from "./pages/parent";
 import Parents from "./pages/parents copy";
-import Journal from "./pages/journal";
+import { Journal } from "./pages/journal/journal";
 import {
   classesData,
   studentsData,
@@ -45,7 +44,7 @@ function App() {
     Classes: <Classes />,
     Teachers: <Teachers />,
     Students: <StudentsPage />,
-    Jurnal: <Jurnal />,
+    Jurnal: <Journal />,
     Parents: <Parents />,
     Schedules: <ClassSchedule />,
   };

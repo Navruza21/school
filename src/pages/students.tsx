@@ -64,7 +64,6 @@ const StudentsPage = () => {
   const [addPhone, setAddPhone] = React.useState("");
   const [addReyting, setAddReyting] = React.useState<number>(0);
 
-  // edit dialog(modal)
   const handleOpenEditModal = (index: number) => {
     const studentToEdit = students[index];
     setEditIndex(index);

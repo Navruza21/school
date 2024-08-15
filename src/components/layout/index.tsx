@@ -280,9 +280,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               label: "Students",
             },
             {
-              key: "Journal",
+              key: "Jurnal",
               icon: <FaJournalWhills />,
-              label: "Journal",
+              label: "Jurnal",
             },
             {
               key: "Schedules",
