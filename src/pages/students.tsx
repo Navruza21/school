@@ -63,8 +63,6 @@ const StudentsPage = () => {
   const [addParent, setAddParent] = React.useState("");
   const [addRelation, setAddRelation] = React.useState("");
 
-  const parentRelations = ["Mother", "Father", "Guardian", "Other"];
-
   const handleOpenEditModal = (index: number) => {
     const studentToEdit = students[index];
     setEditIndex(index);
@@ -266,21 +264,23 @@ const StudentsPage = () => {
             value={editParent}
             onChange={(e) => setEditParent(e.target.value as string)}
           >
-            {parentRelations.map((relation) => (
-              <MenuItem key={relation} value={relation}>
-                {relation}
+            {students.map((student) => (
+              <MenuItem key={student.parent} value={student.parent}>
+                {student.parent}
               </MenuItem>
             ))}
           </Select>
-          <TextField
+          <Select
             margin="dense"
             id="relation"
             label="Relation"
-            type="text"
             fullWidth
             value={editRelation}
-            onChange={(e) => setEditRelation(e.target.value)}
-          />
+            onChange={(e) => setEditRelation(e.target.value as string)}
+          >
+            <MenuItem value="Father">Father</MenuItem>
+            <MenuItem value="Mother">Mother</MenuItem>
+          </Select>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseEditModal}>Cancel</Button>
@@ -363,15 +363,17 @@ const StudentsPage = () => {
             value={addParent}
             onChange={(e) => setAddParent(e.target.value)}
           />
-          <TextField
+          <Select
             margin="dense"
             id="relation"
-            label="Father or mother"
-            type="text"
+            label="Relation"
             fullWidth
             value={addRelation}
-            onChange={(e) => setAddRelation(e.target.value)}
-          />
+            onChange={(e) => setAddRelation(e.target.value as string)}
+          >
+            <MenuItem value="Father">Father</MenuItem>
+            <MenuItem value="Mother">Mother</MenuItem>
+          </Select>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAddModal}>Cancel</Button>
