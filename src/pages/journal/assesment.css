@@ -92,7 +92,7 @@ button {
   color: #666;
 }
 .selectedDateTopic {
-  border-bottom: 2px solid #6200ea;
+  border-bottom: 2px solid #6200ea !important;
 }
 .selected-month {
   color: #6200ea;
