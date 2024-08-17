@@ -14,14 +14,14 @@ export type ClassType = {
 
 const Classes = () => {
   const { teachers, classes, setClasses } = useDataContext();
-  React.useEffect(() => {
-    const storedClasses = localStorage.getItem("classes");
-    if (storedClasses) setClasses(JSON.parse(storedClasses));
-  }, [setClasses]);
+  // React.useEffect(() => {
+  //   const storedClasses = localStorage.getItem("classes");
+  //   if (storedClasses) setClasses(JSON.parse(storedClasses));
+  // }, [setClasses]);
 
-  React.useEffect(() => {
-    localStorage.setItem("classes", JSON.stringify(classes));
-  }, [classes]);
+  // React.useEffect(() => {
+  //   localStorage.setItem("classes", JSON.stringify(classes));
+  // }, [classes]);
 
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false);
   const [editIndex, setEditIndex] = React.useState<number | null>(null);
