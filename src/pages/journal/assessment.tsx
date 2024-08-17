@@ -44,6 +44,16 @@ const loadScoresFromLocalStorage = (subject: string, date: string) => {
   return scores ? JSON.parse(scores) : {};
 };
 
+const saveTopicsToLocalStorage = (date: string, topic: string) => {
+  const key = `topic_${date}`;
+  localStorage.setItem(key, topic);
+};
+
+const loadTopicFromLocalStorage = (date: string) => {
+  const key = `topic_${date}`;
+  return localStorage.getItem(key) || "";
+};
+
 const holidays = [new Date(2024, 0, 1), new Date(2024, 6, 4)];
 
 const isHoliday = (date: Date): boolean => {
@@ -57,9 +67,11 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
     studentIndex: number;
     date: Date;
   } | null>(null);
+  const [editingTopicDate, setEditingTopicDate] = useState<Date | null>(null);
   const [studentScores, setStudentScores] = useState<{
     [studentIndex: number]: { [date: string]: string };
   }>({});
+  const [topics, setTopics] = useState<{ [date: string]: string }>({});
 
   const { students } = useDataContext();
 
@@ -67,6 +79,15 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
     const date = format(currentMonth, "yyyy-MM");
     const scores = loadScoresFromLocalStorage(subject, date);
     setStudentScores(scores);
+
+    // Load topics for the current month
+    const monthTopics = datesInMonth.reduce((acc, date) => {
+      const formattedDate = format(date, "yyyy-MM-dd");
+      acc[formattedDate] = loadTopicFromLocalStorage(formattedDate);
+      return acc;
+    }, {} as { [date: string]: string });
+
+    setTopics(monthTopics);
   }, [subject, currentMonth]);
 
   const handlePreviousMonth = (): void => {
@@ -89,6 +110,10 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
     setEditingCell({ studentIndex, date });
   };
 
+  const handleDoubleClickTopic = (date: Date): void => {
+    setEditingTopicDate(date);
+  };
+
   const handleEnterDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     studentIndex: number,
@@ -99,6 +124,15 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
     }
   };
 
+  const handleTopicEnterDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    date: Date
+  ) => {
+    if (e.key === "Enter") {
+      handleTopicBlur(date, (e.target as HTMLInputElement).value);
+    }
+  };
+
   const handleBlur = (
     studentIndex: number,
     date: Date,
@@ -106,13 +140,13 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
   ): void => {
     const score = Number(value);
     if (score >= 1 && score <= 5) {
-      const formattedDate = format(date, "yyyy-MM-dd"); // Format date correctly
+      const formattedDate = format(date, "yyyy-MM-dd");
       setStudentScores((prevScores) => {
         const newScores = {
           ...prevScores,
           [studentIndex]: {
             ...prevScores[studentIndex],
-            [formattedDate]: value, // Save score using formatted date
+            [formattedDate]: value,
           },
         };
         const dateKey = format(currentMonth, "yyyy-MM");
@@ -121,6 +155,19 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
       });
     }
     setEditingCell(null);
+  };
+
+  const handleTopicBlur = (date: Date, value: string): void => {
+    const formattedDate = format(date, "yyyy-MM-dd");
+    setTopics((prevTopics) => {
+      const newTopics = {
+        ...prevTopics,
+        [formattedDate]: value,
+      };
+      saveTopicsToLocalStorage(formattedDate, value);
+      return newTopics;
+    });
+    setEditingTopicDate(null);
   };
 
   const getColorForScore = (score: string) => {
@@ -162,19 +209,7 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
         className="scrollbar-hidden"
       >
         <div className="date-picker">
-          <div className="flex justify-center align-middle content-center">
-            {/* <div className="header w-[140px]">
-              <button onClick={handlePreviousMonth}>
-                <FaRegArrowAltCircleLeft />
-              </button>
-              <span className="w-[200px]">
-                {format(currentMonth, "MMMM yyyy")}
-              </span>
-              <button onClick={handleNextMonth}>
-                <FaRegArrowAltCircleRight />
-              </button>
-            </div> */}
-          </div>
+          <div className="flex justify-center align-middle content-center"></div>
           <div className="month-picker flex justify-between mx-2 my-3">
             {monthsInYear.map((month) => (
               <button
@@ -214,15 +249,26 @@ const Assessment: React.FC<{ subject: string }> = ({ subject }) => {
                     >
                       {format(date, "d")}
                     </p>
-                    <p
+                    <TableCell
+                      sx={{ minHeight: "40px" }}
+                      onDoubleClick={() => handleDoubleClickTopic(date)}
                       className={`date ${
                         selectedDate && isSameDay(date, selectedDate)
                           ? "selectedDateTopic"
                           : ""
                       } `}
                     >
-                      tematematema tema
-                    </p>
+                      {editingTopicDate && isSameDay(editingTopicDate, date) ? (
+                        <input
+                          type="text"
+                          autoFocus
+                          onBlur={(e) => handleTopicBlur(date, e.target.value)}
+                          onKeyDown={(e) => handleTopicEnterDown(e, date)}
+                        />
+                      ) : (
+                        topics[format(date, "yyyy-MM-dd")] || ""
+                      )}
+                    </TableCell>
                   </div>
                 </TableCell>
               ))}
